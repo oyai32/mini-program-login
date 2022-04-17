@@ -1,6 +1,6 @@
 {
     "name" : "oyyl-wxlogin",
-    "appid" : "__UNI__4706459",
+    "appid" : "",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -50,7 +50,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wxc5f420f0055f6457",
+        "appid" : "",
         "setting" : {
             "urlCheck" : false,
             "es6" : true,
