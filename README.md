@@ -4,7 +4,7 @@
 
 2、若不能直接识别到云服务器，则需手动将uniCloud下对应的云函数剪切到自己的云数据库目录下
 
-3、修改 common/wx-auth/index.js 里的wxConfigMp，并上传所有云函数 
+3、修改 common/wx-auth/index.js 里的 wxConfigMp，并上传所有云函数 
 
 4、使用db_init.json 初始化数据库 （创建user表）
 
