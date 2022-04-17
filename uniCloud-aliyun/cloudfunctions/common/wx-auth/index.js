@@ -3,8 +3,8 @@
  * 微信相关业务
  */
 const wxConfigMp = {
-	appId: '',
-	secret: ''
+    appId: 'wxc5f420f0055f6457',
+    secret: '0d42747b55de86dfd8b6b1b4e535102c',
 }
 
 const crypto = require('crypto')

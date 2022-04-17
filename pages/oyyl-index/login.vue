@@ -36,14 +36,12 @@
 					encryptedData,
 					iv
 				} = await wx.getUserInfo();
-				console.log(iv,'iv')
 				
 				const userInfo = await login({
 					code,
 					encryptedData,
 					iv
 				});
-				console.log(11111111,userInfo)
 				this.$store.dispatch('setUserData', userInfo);
 				showToast('登陆成功');
 
