@@ -33,10 +33,10 @@ exports.main = async (event, context) => {
 		// 如果已经有了，则更新库里的信息
 		if (result.data.length > 0) {
 			let user = result.data[0]
-			id=user._id;
-			nickname=user.nickname;
-			gender=user.gender;
-			avatar=user.avatar
+			id = user._id;
+			nickname = user.nickname;
+			gender = user.gender;
+			avatar = user.avatar
 		} else {
 			// 若没有，则插入该用户数据
 			const r = await collection.add({
@@ -48,14 +48,12 @@ exports.main = async (event, context) => {
 			id = r.id
 		}
 		return {
+			status: 1,
 			data: {
-				status: 1,
-				userInfo: {
-					id,
-					nickname,
-					gender,
-					avatar
-				}
+				id,
+				nickname,
+				gender,
+				avatar
 			}
 		}
 	}
@@ -75,22 +73,19 @@ exports.main = async (event, context) => {
 		})
 		console.log('r', r)
 		return {
+			status: 1,
 			data: {
-				status: 1,
-				userInfo: {
-					id,
-					nickname,
-					gender,
-					avatar
-				}
+				id,
+				nickname,
+				gender,
+				avatar
 			}
 		}
 	}
 
 	return {
-		data: {
-			status: 0,
-			msg: '获取用户失败'
-		}
+		status: 0,
+		data: null,
+		msg: '获取用户失败'
 	}
 };

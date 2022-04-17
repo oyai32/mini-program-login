@@ -12,13 +12,13 @@
 
 <script>
 	import {
-		request
-	} from '@/common/oyyl-js/request';
+		login
+	} from '@/common/oyyl-js/service.js';
 	import {
-		msg
+		showToast
 	} from '@/common/oyyl-js/util.js'
-
 	import logo from '@/static/logo.png'
+	
 	export default {
 		data() {
 			return {
@@ -28,41 +28,29 @@
 		onLoad() {},
 		methods: {
 			async mpWxLogin() {
-				try {
-					const userInfo = await this.getUserInfo();
-					this.$store.dispatch('setUserData', userInfo);
-					msg('登陆成功');
-
-					setTimeout(() => {
-						uni.navigateBack();
-					}, 2000)
-				} catch (e) {
-					msg(e.msg);
-				}
-			},
-			async getUserInfo() {
-				const [loginErr, loginData] = await uni.login({
-					provider: 'weixin'
-				})
-				const [err, userData] = await uni.getUserInfo();
-				const res = await request('oyyl-user', 'loginByWeixin', {
-					code: loginData.code,
-					encryptedData: userData.encryptedData,
-					iv: userData.iv
-				}, {
-					showLoading: true
-				});
 				const {
-					status,
-					userInfo
-				} = res;
+					code
+				} = await wx.login();
+				
+				const {
+					encryptedData,
+					iv
+				} = await wx.getUserInfo();
+				console.log(iv,'iv')
+				
+				const userInfo = await login({
+					code,
+					encryptedData,
+					iv
+				});
+				console.log(11111111,userInfo)
+				this.$store.dispatch('setUserData', userInfo);
+				showToast('登陆成功');
 
-				if (status === 0) {
-					throw new Error((res.msg))
-				}
-
-				return userInfo;
-			}
+				setTimeout(() => {
+					uni.navigateBack();
+				}, 2000)
+			},
 		}
 	}
 </script>

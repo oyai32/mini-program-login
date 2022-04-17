@@ -27,10 +27,11 @@ export const throttle = (fn, delay=500) => {
 	    _throttleRunning = false;
 	}, delay);
 }
+
 /**
  * toast
  */
-export const msg = (title = '', param={}) => {
+export const showToast = (title = '', param={}) => {
 	if(!title) return;
 	uni.showToast({
 		title,
@@ -38,20 +39,4 @@ export const msg = (title = '', param={}) => {
 		mask: param.mask || false,
 		icon: param.icon || 'none'
 	});
-}
-/**
- * 检查登录
- * @return {Boolean}
- */
-export const isLogin = (options={}) => {
-	const userInfo = uni.getStorageSync('userInfo');
-	if(userInfo){
-		return true;
-	}
-	if(options.nav !== false){
-		uni.navigateTo({
-			url: '/pages/oyyl-index/login'
-		})
-	}
-	return false;
 }

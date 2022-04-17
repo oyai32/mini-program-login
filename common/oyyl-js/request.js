@@ -1,6 +1,6 @@
 import {
-	msg
-} from './util'
+	showToast
+} from './util.js'
 
 /**
  * @param {String} cloudFnName
@@ -10,9 +10,14 @@ import {
  */
 export const request = (cloudFnName, operation, data = {}, ext = {}) => {
 	return new Promise((resolve, reject) => {
-		if (ext.showLoading !== false) {
+		const {
+			showLoading = false
+		} = ext;
+
+		if (showLoading) {
 			uni.showLoading()
 		}
+
 		uniCloud.callFunction({
 			name: cloudFnName,
 			data: {
@@ -20,12 +25,26 @@ export const request = (cloudFnName, operation, data = {}, ext = {}) => {
 				data
 			}
 		}).then(res => {
-			if (ext.showLoading !== false) {
+			if (showLoading) {
 				uni.hideLoading()
 			}
-			resolve(res.result.data);
+
+			const {
+				result,
+				result: {
+					status,
+					msg,
+					data
+				}
+			} = res;
+			if (status === 1) {
+				resolve(data);
+			} else {
+				showToast(msg);
+				reject(new Error(msg));
+			}
 		}).catch((err) => {
-			if (ext.showLoading !== false) {
+			if (showLoading) {
 				uni.hideLoading()
 			}
 			reject(err);

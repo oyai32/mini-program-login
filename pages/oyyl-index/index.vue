@@ -53,7 +53,6 @@
 				const userProfile = await wx.getUserProfile({
 					desc: "更新用户信息"
 				});
-				console.log('userProfile',userProfile)
 				const {
 					nickName,
 					gender,
